@@ -58,13 +58,8 @@ void delay_ms(uint ms)
 
 void beep_ms(uint ms)
 {
-    uint i;
-    for (i = 0; i < ms; i++) {
-        BUZZER = 1;
-        delay_us(250);
-        BUZZER = 0;
-        delay_us(250);
-    }
+    BUZZER = 1;
+    delay_ms(ms);
     BUZZER = 0;
 }
 
