@@ -449,7 +449,6 @@ void unlock_action(void)
     lcd_clear_text();
     lcd_puts(4, 1, "LOCK CLOSED");
     lcd_puts(6, 1, "BACK HOME");
-    beep_ms(120);
     delay_ms(600);
 
     LOCK_LED = 0;
@@ -468,8 +467,7 @@ void lockout_action(void)
         lcd_puts(6, 1, "WAIT:");
         lcd_put_uint4(6, 7, sec);
         lcd_puts(6, 12, "S");
-        beep_ms(60);
-        delay_ms(940);
+        delay_ms(1000);
     }
 
     wrong_count = 0;
@@ -561,7 +559,6 @@ void change_password(void)
     if (password_equal(input_buf, temp_buf)) {
         copy_password(password, temp_buf);
         wrong_count = 0;
-        beep_ms(120);
         show_message("PASSWORD", "CHANGED", 1200);
     } else {
         beep_ms(300);
@@ -591,7 +588,6 @@ void clear_count(void)
 
     if (password_equal(input_buf, password)) {
         open_count = 0;
-        beep_ms(120);
         show_message("COUNT CLEAR", "OK", 1000);
     } else {
         beep_ms(300);
