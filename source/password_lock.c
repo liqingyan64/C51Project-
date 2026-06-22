@@ -60,11 +60,12 @@ void beep_ms(uint ms)
 {
     uint i;
     for (i = 0; i < ms; i++) {
-        BUZZER = 1;
-        delay_us(90);
         BUZZER = 0;
-        delay_us(90);
+        delay_us(250);
+        BUZZER = 1;
+        delay_us(250);
     }
+    BUZZER = 1;
 }
 
 void lcd_wait(void)
@@ -619,7 +620,7 @@ void main(void)
     P3 = 0x00;
 
     LOCK_LED = 0;
-    BUZZER = 0;
+    BUZZER = 1;
     ALARM_LED = 0;
     LOCKED_LED = 1;
 
