@@ -258,7 +258,7 @@ void unlock_animation_loop(void)
     while (1) {
         for (i = 0; i < UNLOCK_ANIM_FRAME_COUNT; i++) {
             show_anim_frame(i);
-            if (anim_wait_or_exit(90)) {
+            if (anim_wait_or_exit(70)) {
                 lcd_clear_graph();
                 return;
             }
