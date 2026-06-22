@@ -196,6 +196,7 @@ void show_anim_frame(uchar frame)
     uint i;
     uint end;
     uint pos = 0;
+    uint frame_size = UNLOCK_ANIM_WIDTH_BYTES * UNLOCK_ANIM_HEIGHT;
     uchar count;
     uchar value;
 
@@ -206,11 +207,13 @@ void show_anim_frame(uchar frame)
     i = unlock_anim_offsets[frame];
     end = unlock_anim_offsets[frame + 1];
 
-    while (i < end && pos < 512) {
+    while (i < end && pos < frame_size) {
         count = unlock_anim_rle[i++];
         value = unlock_anim_rle[i++];
-        while (count > 0 && pos < 512) {
-            graph_write_byte(32 + pos / 8, 4 + pos % 8, value);
+        while (count > 0 && pos < frame_size) {
+            graph_write_byte(UNLOCK_ANIM_START_ROW + pos / UNLOCK_ANIM_WIDTH_BYTES,
+                             UNLOCK_ANIM_START_COL + pos % UNLOCK_ANIM_WIDTH_BYTES,
+                             value);
             pos++;
             count--;
         }
@@ -255,7 +258,7 @@ void unlock_animation_loop(void)
     while (1) {
         for (i = 0; i < UNLOCK_ANIM_FRAME_COUNT; i++) {
             show_anim_frame(i);
-            if (anim_wait_or_exit(120)) {
+            if (anim_wait_or_exit(90)) {
                 lcd_clear_graph();
                 return;
             }
