@@ -610,6 +610,25 @@ void show_home(void)
     lcd_puts(14, 0, "PASS:123456");
 }
 
+void show_boot_screen(void)
+{
+    uchar i;
+
+    lcd_clear();
+    lcd_puts(1, 2, "C51 SECURITY");
+    lcd_puts(3, 2, "PASSWORD LOCK");
+    lcd_puts(6, 1, "SYSTEM INIT...");
+    lcd_puts(9, 1, "[              ]");
+
+    for (i = 0; i < 14; i++) {
+        lcd_put_char(9, 2 + i, '#');
+        delay_ms(140);
+    }
+
+    lcd_puts(12, 5, "READY");
+    delay_ms(700);
+}
+
 void main(void)
 {
     char key;
@@ -625,7 +644,7 @@ void main(void)
     LOCKED_LED = 1;
 
     lcd_init();
-    show_message("WELCOME", "PASSWORD LOCK", 1500);
+    show_boot_screen();
     show_home();
 
     while (1) {
