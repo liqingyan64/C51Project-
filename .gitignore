@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.obj
+*.lst
+*.lnp
+*.m51
+*.plg
+*.uvgui.*
+*.bak
+*.pdsbak
+Objects/
+Listings/

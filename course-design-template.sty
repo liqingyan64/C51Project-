@@ -1,0 +1,106 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{course-design-template}[2026/06/22 C51 course design template]
+
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{xeCJK}
+\RequirePackage{fontspec}
+\RequirePackage{fancyhdr}
+\RequirePackage{calc}
+\RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{ifthen}
+
+\geometry{
+  a4paper,
+  top=2.54cm,
+  bottom=2.54cm,
+  left=3.175cm,
+  right=3.175cm,
+  headheight=12pt,
+  headsep=0.96cm,
+  footskip=1.25cm
+}
+
+\setmainfont{Times New Roman}
+\setCJKmainfont[AutoFakeBold=2.5]{SimSun}
+\setCJKsansfont[AutoFakeBold=2.5]{SimHei}
+\setCJKfamilyfont{hei}[AutoFakeBold=2.5]{SimHei}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\linespread{1.25}
+
+\fancypagestyle{coverpage}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{bodypage}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\newlength{\coverlineheight}
+\setlength{\coverlineheight}{40pt}
+
+\newcommand{\coverfont}{\CJKfamily{hei}\bfseries\fontsize{22pt}{40pt}\selectfont}
+\newcommand{\covertitlefont}{\CJKfamily{hei}\bfseries\fontsize{26pt}{31.2pt}\selectfont}
+
+\newcommand{\BlankUnderline}[1]{%
+  \makebox[#1][l]{\hrulefill}%
+}
+
+\newcommand{\TextUnderline}[2]{%
+  \makebox[#1][c]{\ulinecontent{#2}}%
+}
+
+\newcommand{\ulinecontent}[1]{%
+  \ifthenelse{\equal{#1}{}}{\hrulefill}{\underline{\makebox[\widthof{#1}][c]{#1}}\hfill}%
+}
+
+\newcommand{\CoverField}[3]{%
+  {\coverfont
+    \makebox[2.55cm][s]{#1}%
+    \hspace{0.35cm}%
+    \makebox[#2][c]{\ifthenelse{\equal{#3}{}}{\hrulefill}{\underline{\makebox[#2][c]{#3}}}}%
+  }\par
+}
+
+\newcommand{\makecoursecover}{%
+  \thispagestyle{coverpage}%
+  \begingroup
+  \setlength{\parindent}{0pt}%
+  \noindent\includegraphics[width=15.2135cm,height=3.6248cm]{assets/image1.png}\par
+  \vspace{1.02cm}
+  \begin{center}
+    {\covertitlefont 《单片机原理与应用》\par}
+    \vspace{0.16cm}
+    {\covertitlefont 课程设计\par}
+  \end{center}
+  \vspace{0.85cm}
+  \CoverField{题目}{10.15cm}{\ReportTitle}
+  \vspace{0.78cm}
+  \CoverField{学院}{9.15cm}{\CollegeName}
+  \CoverField{专业}{9.15cm}{\MajorName}
+  \CoverField{年级}{9.15cm}{\GradeName}
+  \CoverField{学号}{9.15cm}{\StudentId}
+  \CoverField{姓名}{9.15cm}{\StudentName}
+  \vspace{1.58cm}
+  \begin{center}
+    {\coverfont \ReportDate\par}
+  \end{center}
+  \endgroup
+}
+
+\titleformat{\section}
+  {\CJKfamily{hei}\bfseries\fontsize{16pt}{24pt}\selectfont}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\CJKfamily{hei}\bfseries\fontsize{14pt}{21pt}\selectfont}
+  {\thesubsection}{1em}{}
